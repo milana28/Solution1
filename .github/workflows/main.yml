@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build the Docker image
-        run: docker build -f WebApplication/Dockerfile -t milanabijeljanin28/my-private-repository:my-image .
+        run: docker build -f WebApplication1/Dockerfile -t milanabijeljanin28/my-private-repository:my-image .
       - name: Push the Docker image to the registry
         run: docker push milanabijeljanin28/my-private-repository:my-image
       - name: Run tests
