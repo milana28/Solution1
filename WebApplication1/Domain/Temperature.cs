@@ -7,7 +7,7 @@ public class Temperature
 
     public double CelsiusToFahrenheit()
     {
-        return Celsius * 1.8 + 32;
+        return Celsius * 1.8 + 32; 
     }
     
     public double FahrenheitToCelsius()
