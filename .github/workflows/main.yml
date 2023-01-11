@@ -7,21 +7,52 @@ on:
     branches: [ "master" ]
 
 jobs:
-
+  jobs.1:
+    name: Build
+  jobs.2:
+    name: Test
+  jobs.3: 
+    name: Deploy
+    
+jobs.1:
+  
   build:
 
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-      - name: Login to Dockerhub Registry
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build the Docker image
-        run: docker build -f WebApplication1/Dockerfile -t milanabijeljanin28/my-private-repository:my-image .
-      - name: Push the Docker image to the registry
-        run: docker push milanabijeljanin28/my-private-repository:my-image
+      - name: Build the application
+        run: dotnet build
+
+
+jobs.2:
+  
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
       - name: Run tests
         run: dotnet test TestProject1
+        
+        
+jobs.3:
+
+  build:
+
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v3
+        - name: Login to Dockerhub Registry
+          uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+        - name: Build the Docker image
+          run: docker build -f WebApplication1/Dockerfile -t milanabijeljanin28/my-private-repository:my-image .
+        - name: Push the Docker image to the registry
+          run: docker push milanabijeljanin28/my-private-repository:my-image
+  
